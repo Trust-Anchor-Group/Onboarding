@@ -63,6 +63,14 @@ The following process is used to onboard new TAG Digital ID-based apps:
 	`+1555` are permitted. Such phone numbers do not send SMS messages. Instead, they are validated using the `/ID/TestOTP.md`
 	resource. It is only possible to create accounts for test use using this method. Such accounts are also limited in time.
 
+7.	The Neuron the client is redirected to in (5) above can validate the onboarding by calling the `ValidateOnboarding.ws`
+	resource with the Remote Endpoint of the client, and with any of the e-mail address and/or phone number provided by the
+	client to the Neuron. This way, the remote endpoint can automatically validate claims made by the client and assure that
+	e-mail addresses and phone numbers provided have been validated and are correct.
+	
+	**Note**: Validation of phone number and e-mail addresses can only be performed up to 24 hours after successful validation,
+	after which the information is removed from memory.
+
 [textlocal.com]: https://textlocal.com/
 [script]: https://lab.tagroot.io/Script.md
 [Markdown]: https://lab.tagroot.io/Markdown.md
