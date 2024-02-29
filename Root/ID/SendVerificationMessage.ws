@@ -70,20 +70,22 @@ else if exists(Posted.EMail) then
 	if Global.VerifyingNumbers.ContainsKey(Posted.EMail) then
 		Waher.Security.LoginMonitor.LoginAuditor.Fail("Resending Tag ID verification code.", Posted.EMail, Request.RemoteEndPoint, "HTTPS", []);
 
+	AppName:=exists(Posted.AppName) ? MarkdownEncode(Posted.AppName) : "TAG Digital ID";
+
 	SendMail(Posted.EMail, "Verification Code", 
 		"Hello\r\n"+
 		"\r\n"+
-		"This e-mail is sent to you because someone is registering this e-mail address with the *TAG Digital ID*.\r\n"+
+		"This e-mail is sent to you because someone is registering this e-mail address with *" + AppName + "*.\r\n"+
 		"If you have not done this, you can ignore this message. The e-mail address will not be registered.\r\n"+
 		"If you initiated this registration, you will need to provide the following *verification code* into your app.\r\n"+
 		"\r\n"+
 		"Following is your verification code: **" + VerificationCode + "**\r\n"+
 		"\r\n"+
 		"Best regards,  \r\n"+
-		"The *TAG ID* team\r\n"+
+		"The *" + AppName + "* team\r\n"+
 		"\r\n"+
 		"PS: This mail is automatically generated, and any responses sent to it will be not be processed.\r\n"+
-		"To cotact the *TAG ID* team, you need to contact the corresponding support channel."
+		"To cotact the *" + AppName + "* team, you need to contact the corresponding support channel."
 		);
 
 	Message:="Verification Code sent to " + Posted.EMail + ".";
