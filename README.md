@@ -32,11 +32,12 @@ The following process is used to onboard new TAG Digital ID-based apps:
 		messages are sent via this e-mail relay. The actual mail message is formed using [Markdown][], and then sent using the
 		`SendMail` [script][] function to the recipient.
 
-	*	SMS messages are sent using the web service provided by [textlocal.com][]. You need an API key to
-		this service, if you're going to reuse the same implementation in your customized ID onboarding API. (You can also replace
-		this implementation with another messaging service.) The API Key to the [textlocal.com][] is taken form the
-		*Runtime Settings* on the neuron. These can be get and set by the neuron operator, via [script][], by using the
-		`GetSetting` and `SetSetting` functions. These can also be built into a configuration page, if desired.
+	*	SMS messages are sent using the web service provided by [gatewayapi.com][]. You need to have the 
+		[`TAG.GatewayApiSms.package`](https://lab.tagroot.io/Community/Post/Service_for_sending_SMS_using_GatewayAPI)
+		package installed. You also need an API key to this service, if you're going to reuse the same implementation in your 
+		customized ID onboarding API. (You can also replace this implementation with another messaging service.) The API Key to the 
+		[gatewayapi.com][] is taken form the *Runtime Settings* on the Neuron(R). These can be get and set by the neuron operator, 
+		via the administration page, as illustrated in the previous article.
 
 		**Note**: Phone numbers starting with `+1555` are considered app-store testing numbers. If using such a number, no
 		SMS message is sent. Instead, the account being created is flagged as temporary, for test use only. It is validated
@@ -71,6 +72,6 @@ The following process is used to onboard new TAG Digital ID-based apps:
 	**Note**: Validation of phone number and e-mail addresses can only be performed up to 24 hours after successful validation,
 	after which the information is removed from memory.
 
-[textlocal.com]: https://textlocal.com/
+[gatewayapi.com]: https://gatewayapi.com/
 [script]: https://lab.tagroot.io/Script.md
 [Markdown]: https://lab.tagroot.io/Markdown.md

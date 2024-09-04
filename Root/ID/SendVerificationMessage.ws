@@ -36,9 +36,6 @@ if exists(Posted.Nr) then
 	if !(Posted.Nr is System.String) then BadRequest("Phone number must be a string.");
 	if !(Posted.Nr like "\\+[1-9]\\d+") then BadRequest("International number format expected.");
 
-	ApiKey:=GetSetting("TextLocal.Key","");
-	if empty(ApiKey) then ServiceUnavailable("Textlocal service is not configured.");
-
 	if Global.VerifyingNumbers.ContainsKey(Posted.Nr) then
 		Waher.Security.LoginMonitor.LoginAuditor.Fail("Resending Tag ID verification code.", Posted.Nr, Request.RemoteEndPoint, "HTTPS", []);
 
@@ -49,14 +46,7 @@ if exists(Posted.Nr) then
 	)
 	else
 	(
-		Form:=Create(System.Collections.Generic.Dictionary,System.String,System.String);
-		Form["apikey"]:=ApiKey;
-		Form["numbers"]:=Posted.Nr;
-		Form["sender"]:="Tag ID";
-		Form["message"]:="Following is your verification code: " + VerificationCode;
-
-		Post("https://api.txtlocal.com/send/",Form);
-
+		SendGatewayApiSms("NeuroAccess","Following is your verification code: " + VerificationCode,Posted.Nr);
 		Message:="Verification Code sent to " + Posted.Nr + "."
 	);
 
