@@ -7,9 +7,9 @@ PrevCode:=0;
 if !exists(Global.VerifiedNumbers) then
 	Global.VerifiedNumbers:=Create(Waher.Runtime.Cache.Cache,System.String,System.Boolean,System.Int32.MaxValue,System.TimeSpan.MaxValue,System.TimeSpan.FromDays(1));
 
-CallerEndpoint:=Request.RemoteEndPoint;
-k:=CallerEndpoint.LastIndexOf(':');
-if k>0 then CallerEndpoint:=CallerEndpoint.Substring(0,k);
+CallerEndPoint:=Request.RemoteEndPoint;
+k:=CallerEndPoint.LastIndexOf(':');
+if k>0 then CallerEndPoint:=CallerEndPoint.Substring(0,k);
 
 if exists(Posted.Nr) then
 (
@@ -29,7 +29,7 @@ if exists(Posted.Nr) then
 
 	if Result.Status then
 	(
-		Global.VerifiedNumbers.Add(CallerEndpoint+"|"+Posted.Nr,true);
+		Global.VerifiedNumbers.Add(CallerEndPoint+"|"+Posted.Nr,true);
 
 		Result.Message := "Mobile phone number successfully validated.";
 		Waher.Security.LoginMonitor.LoginAuditor.Success(Result.Message, Posted.Nr, Request.RemoteEndPoint, "HTTPS", []);
@@ -113,7 +113,7 @@ else if exists(Posted.EMail) then
 
 	if Result.Status then
 	(
-		Global.VerifiedNumbers.Add(CallerEndpoint+"|"+Posted.EMail,true);
+		Global.VerifiedNumbers.Add(CallerEndPoint+"|"+Posted.EMail,true);
 
 		Result.Message := "E-Mail address successfully validated.";
 		Waher.Security.LoginMonitor.LoginAuditor.Success(Result.Message, Posted.EMail, Request.RemoteEndPoint, "HTTPS", [])
